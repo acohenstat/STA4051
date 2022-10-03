@@ -404,25 +404,24 @@ $$P( Y \leq t) \approx \alpha $$
 
 
 ## Sign Test - Example
-
+::: {.r-fit-text}
 - 18 office workers. 
 - We are interested in comparing the reaction time before lunch (RTBL) vs the reaction time after lunch (RTAL).
 - 12 found their RTBL was shorter
 - 1 could not detect a difference
 - Is the RTAL significantly longer than RTBL?<br>
-`Answer`
 
-We have $n'=18$ pairs, each one for a worker:
+`Answer` We have $n'=18$ pairs, each one for a worker:
 $$ (RTBL,RTAL) = (X,Y)$$
 - `"+"` if $RTBL < RTAL$ (12)
 - `"-"` if $RTBL > RTAL$ (5)
-- `"0"` if $RTBL = RTAL$ (tie) (1
+- `"0"` if $RTBL = RTAL$ (tie) (1)
 
 then $n=17$
-
+:::
 
 ## Sign Test - Example
-
+::: {.r-fit-text}
 1. Define the null and alternative hypotheses <br>
 `Answer:` $$ H_0: E(RTBL) = E(RTAL)$$ $$H_1: E(RTBL) < E(RTAL) $$
 This is an upper-tailed test.
@@ -436,7 +435,7 @@ This is an upper-tailed test.
 <br>
 `Answer:` Since P-value < 0.05 then Reject $H_0$.
 
-
+:::
 
 
 ## Sign Test - Example
