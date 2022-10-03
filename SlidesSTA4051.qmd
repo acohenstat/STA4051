@@ -496,3 +496,17 @@ n
 
 Next, we need to randomly pick 18 people from the population of potential buyers and collect their adjustments. 
 
+
+## Contingency Tables
+
+`Definition` A contingency table is an array of natural numbers in matrix form where those numbers represent counts / frequencies
+
+
+|         | Col 1 | Col2 | Totals
+|---------|:-----:|:------:|:------:|
+| **row 1**   | a   |    b |   a+b   |
+| **row 2**   | c     |   d |  c+d   |
+| **Totals**  | a+c  |   b+d |  a+b+c+d   |
+
+: 2 x 2 contingency table
+
