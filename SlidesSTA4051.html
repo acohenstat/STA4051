@@ -877,7 +877,6 @@ P(X_{(r)} \leq \text{a fraction q of the population} \leq X_{(n+m-1)}) \geq 1-\a
 <h2>Contingency Tables</h2>
 <p><code>Definition</code> A contingency table is an array of natural numbers in matrix form where those numbers represent counts / frequencies</p>
 <table>
-<caption>2 x 2 contingency table</caption>
 <thead>
 <tr class="header">
 <th></th>
@@ -907,6 +906,166 @@ P(X_{(r)} \leq \text{a fraction q of the population} \leq X_{(n+m-1)}) \geq 1-\a
 </tr>
 </tbody>
 </table>
+<p>2 x 2 contingency table</p>
+</section>
+<section id="contingency-tables---chi-squared-test-for-differences-in-probabilities" class="slide level2">
+<h2>Contingency Tables - Chi-squared Test for differences in Probabilities</h2>
+<p><code>Data</code></p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Class 1</th>
+<th style="text-align: center;">Class2</th>
+<th style="text-align: center;"><code>Totals</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Population 1</strong></td>
+<td style="text-align: center;">a (<span class="math inline">\(p_1\)</span>)</td>
+<td style="text-align: center;">b</td>
+<td style="text-align: center;"><span class="math inline">\(n_1\)</span> = a+b</td>
+</tr>
+<tr class="even">
+<td><strong>Population 2</strong></td>
+<td style="text-align: center;">c (<span class="math inline">\(p_2\)</span>)</td>
+<td style="text-align: center;">d</td>
+<td style="text-align: center;"><span class="math inline">\(n_2\)</span> = c+d</td>
+</tr>
+<tr class="odd">
+<td><strong><code>Totals</code></strong></td>
+<td style="text-align: center;"><span class="math inline">\(c_1\)</span> = a+c</td>
+<td style="text-align: center;"><span class="math inline">\(c_2\)</span>= b+d</td>
+<td style="text-align: center;">N = a+b+c+d</td>
+</tr>
+</tbody>
+</table>
+<p>2 x 2 contingency table</p>
+<p><code>Assumption</code></p>
+<ul>
+<li>Each sample is Random Sample</li>
+<li>The 2 samples are independent</li>
+<li>Each observation can be classified into class 1 and class 2</li>
+</ul>
+</section>
+<section id="contingency-tables---chi-squared-test-for-differences-in-probabilities-1" class="slide level2">
+<h2>Contingency Tables - Chi-squared Test for differences in Probabilities</h2>
+<p><code>Test Statistic</code></p>
+<p><span class="math display">\[ T= \frac{\sqrt{N} (ad - bc)}{\sqrt{n_1n_2c_1c_1}}\]</span></p>
+<p><code>Null distirbution</code>: <span class="math inline">\(T \sim N(0,1)\)</span></p>
+</section>
+<section id="contingency-tables---chi-squared-test-for-differences-in-probabilities-2" class="slide level2">
+<h2>Contingency Tables - Chi-squared Test for differences in Probabilities</h2>
+<p><code>Hypothesis: Two-tailed test</code></p>
+<p><span class="math display">\[ H_0:p_1 = p_2 \]</span></p>
+<p><span class="math display">\[H_1: p_1 \neq p_2 \]</span></p>
+<ul>
+<li><p><span class="math inline">\(p_1\)</span> the probability that a randomly selected obs from the population 1 will be in class 1.</p></li>
+<li><p><code>P-value</code><span class="math inline">\(= 2\times \min\{ P( T \leq T_{Obs}), P(T \geq T_{Obs}) \}\)</span></p></li>
+<li><p><code>Decision</code>: IF p_value &lt; <span class="math inline">\(\alpha\)</span> then REJECT <span class="math inline">\(H_0\)</span></p></li>
+</ul>
+</section>
+<section id="contingency-tables---chi-squared-test-for-differences-in-probabilities-3" class="slide level2">
+<h2>Contingency Tables - Chi-squared Test for differences in Probabilities</h2>
+<p><code>Hypothesis: Lower-tailed test</code></p>
+<p><span class="math display">\[ H_0:p_1 = p_2 \]</span></p>
+<p><span class="math display">\[H_1: p_1 &lt; p_2 \]</span></p>
+<ul>
+<li><p><span class="math inline">\(p_1\)</span> the probability that a randomly selected obs from the population 1 will be in class 1.</p></li>
+<li><p><code>P-value</code><span class="math inline">\(= P( T \leq T_{Obs})\)</span></p></li>
+<li><p><code>Decision</code>: IF p_value &lt; <span class="math inline">\(\alpha\)</span> then REJECT <span class="math inline">\(H_0\)</span></p></li>
+</ul>
+</section>
+<section id="contingency-tables---chi-squared-test-for-differences-in-probabilities-4" class="slide level2">
+<h2>Contingency Tables - Chi-squared Test for differences in Probabilities</h2>
+<p><code>Hypothesis: Upper-tailed test</code></p>
+<p><span class="math display">\[ H_0:p_1 = p_2 \]</span></p>
+<p><span class="math display">\[H_1: p_1 &gt; p_2 \]</span></p>
+<ul>
+<li><p><span class="math inline">\(p_1\)</span> the probability that a randomly selected obs from the population 1 will be in class 1.</p></li>
+<li><p><code>P-value</code><span class="math inline">\(= P( T \geq T_{Obs})\)</span></p></li>
+<li><p><code>Decision</code>: IF p_value &lt; <span class="math inline">\(\alpha\)</span> then REJECT <span class="math inline">\(H_0\)</span></p></li>
+</ul>
+</section>
+<section id="chi-squared-test---example" class="slide level2">
+<h2>Chi-squared Test - Example</h2>
+<p>The number of items in two car loads.</p>
+<p><code>Data</code></p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Defective</th>
+<th style="text-align: center;">Non defective</th>
+<th style="text-align: center;"><code>Totals</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Carload 1</strong></td>
+<td style="text-align: center;">a =13</td>
+<td style="text-align: center;">b=73</td>
+<td style="text-align: center;"><span class="math inline">\(n_1\)</span> = 86</td>
+</tr>
+<tr class="even">
+<td><strong>Carload 2</strong></td>
+<td style="text-align: center;">c = 17</td>
+<td style="text-align: center;">d=57</td>
+<td style="text-align: center;"><span class="math inline">\(n_2\)</span> = 74</td>
+</tr>
+<tr class="odd">
+<td><strong><code>Totals</code></strong></td>
+<td style="text-align: center;"><span class="math inline">\(c_1\)</span> = 30</td>
+<td style="text-align: center;"><span class="math inline">\(c_2\)</span>= 130</td>
+<td style="text-align: center;">N = 160</td>
+</tr>
+</tbody>
+</table>
+<p>2 x 2 contingency table</p>
+<p><code>Question</code>: Test whether there are difference in proportions of defective items between the two carloads.</p>
+</section>
+<section id="chi-squared-test---example-1" class="slide level2">
+<h2>Chi-squared Test - Example</h2>
+<div class="r-fit-text">
+<ol type="1">
+<li>Define the null and alternative hypotheses <br> <code>Answer:</code> <span class="math display">\[ H_0: p_1 = p_2 \]</span> <span class="math display">\[H_1: p_1 \neq p_2 \]</span> This is an two-tailed test.</li>
+<li>Find the Test statistic observed and null distribution<br> <code>Answer:</code> <span class="math inline">\(T_{obs}=-1.2695\)</span> and <span class="math inline">\(T\sim N(0,1)\)</span></li>
+<li>Determine critical values (rejection region) <br> <code>Answer:</code> +/- -1.959964</li>
+<li>Find P-value<br> <code>Answer:</code> p-value=0.2042628</li>
+<li>Decision and Interpretation <br> <code>Answer:</code> Since P-value &gt; 0.05 then Fail to Reject <span class="math inline">\(H_0\)</span>.</li>
+</ol>
+</div>
+</section>
+<section id="chi-squared-test---example-with-r" class="slide level2">
+<h2>Chi-squared Test - Example with R</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>data <span class="ot">=</span> <span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">13</span>,<span class="dv">17</span>),<span class="fu">c</span>(<span class="dv">73</span>,<span class="dv">57</span>)) <span class="co"># create data</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">chisq.test</span>(data, <span class="co"># table data</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>           <span class="at">correct =</span> <span class="cn">FALSE</span> <span class="co"># find p-value without Yates' correction</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>           ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test
+
+data:  data
+X-squared = 1.6116, df = 1, p-value = 0.2043</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">chisq.test</span>(data, <span class="co"># table data</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>           <span class="at">correct =</span> <span class="cn">TRUE</span> <span class="co"># find p-value with Yates' correction</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a>           ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test with Yates' continuity correction
+
+data:  data
+X-squared = 1.1372, df = 1, p-value = 0.2863</code></pre>
+</div>
+</div>
+<ul>
+<li><code>Interpretation</code>: Fail to Reject <span class="math inline">\(H_0\)</span>. There is evidence to support that the data is compatible with equal proportions <span class="math inline">\(p-value=0.2\)</span>.</li>
+<li>Note: <span class="math inline">\(T_{obs}^2 = (-1.2695)^2\)</span> = 1.6116303</li>
+</ul>
 <div class="footer footer-default">
 <p>STA4051 - Nonparametric Statistics - Dr.&nbsp;Cohen</p>
 </div>

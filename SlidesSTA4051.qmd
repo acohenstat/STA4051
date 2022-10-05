@@ -508,5 +508,120 @@ Next, we need to randomly pick 18 people from the population of potential buyers
 | **row 2**   | c     |   d |  c+d   |
 | **Totals**  | a+c  |   b+d |  a+b+c+d   |
 
-: 2 x 2 contingency table
+ 2 x 2 contingency table
+
+
+## Contingency Tables - Chi-squared Test for differences in Probabilities
+
+`Data` 
+
+
+|         | Class 1 | Class2 | `Totals`
+|---------|:-----:|:------:|:------:|
+| **Population 1**   | a ($p_1$)   |    b |   $n_1$ = a+b   |
+| **Population 2**   | c  ($p_2$)   |   d |  $n_2$ = c+d   |
+| **`Totals`**  | $c_1$ = a+c  |   $c_2$= b+d | N = a+b+c+d   |
+
+ 2 x 2 contingency table
+ 
+ 
+ `Assumption` 
+ 
+- Each sample is Random Sample
+- The 2 samples are independent
+- Each observation can be classified into class 1 and class 2
+
+## Contingency Tables - Chi-squared Test for differences in Probabilities
+
+`Test Statistic`
+
+$$ T= \frac{\sqrt{N} (ad - bc)}{\sqrt{n_1n_2c_1c_1}}$$
+`Null distirbution`: $T \sim N(0,1)$
+
+
+## Contingency Tables - Chi-squared Test for differences in Probabilities
+
+`Hypothesis: Two-tailed test`
+$$ H_0:p_1 = p_2 $$ 
+$$H_1: p_1 \neq p_2 $$
+- $p_1$ the probability that a randomly selected obs from the population 1 will be in class 1.
+
+- `P-value`$= 2\times \min\{  P( T \leq T_{Obs}), P(T \geq T_{Obs}) \}$
+
+- `Decision`: IF p_value < $\alpha$ then REJECT $H_0$
+
+
+
+## Contingency Tables - Chi-squared Test for differences in Probabilities
+
+`Hypothesis: Lower-tailed test`
+$$ H_0:p_1 = p_2 $$ 
+$$H_1: p_1 < p_2 $$
+- $p_1$ the probability that a randomly selected obs from the population 1 will be in class 1.
+
+- `P-value`$= P( T \leq T_{Obs})$
+
+- `Decision`: IF p_value < $\alpha$ then REJECT $H_0$
+
+## Contingency Tables - Chi-squared Test for differences in Probabilities
+
+`Hypothesis: Upper-tailed test`
+$$ H_0:p_1 = p_2 $$ 
+$$H_1: p_1 > p_2 $$
+- $p_1$ the probability that a randomly selected obs from the population 1 will be in class 1.
+
+- `P-value`$= P( T \geq T_{Obs})$
+
+- `Decision`: IF p_value < $\alpha$ then REJECT $H_0$
+
+## Chi-squared Test - Example 
+
+The number of items in two car loads.
+
+`Data` 
+
+
+|         | Defective | Non defective | `Totals`
+|---------|:-----:|:------:|:------:|
+| **Carload 1**   | a =13   |    b=73 |   $n_1$ = 86   |
+| **Carload 2**   | c  = 17   |   d=57 |  $n_2$ = 74   |
+| **`Totals`**  | $c_1$ = 30 |   $c_2$= 130 | N = 160  |
+
+ 2 x 2 contingency table
+ 
+ `Question`: Test whether there are difference in proportions of defective items between the two carloads.
+ 
+## Chi-squared Test - Example
+ 
+::: {.r-fit-text}
+1. Define the null and alternative hypotheses <br>
+`Answer:` $$ H_0: p_1 = p_2 $$ $$H_1: p_1 \neq p_2 $$
+This is an two-tailed test.
+2. Find the Test statistic observed and null distribution<br>
+`Answer:` $T_{obs}=-1.2695$ and $T\sim N(0,1)$
+3. Determine critical values (rejection region) <br>
+`Answer:` +/- `r {qnorm(0.025)}`
+4. Find P-value<br>
+`Answer:` p-value=`r {2*pnorm(-1.2695)}`
+5. Decision and Interpretation
+<br>
+`Answer:` Since P-value > 0.05 then Fail to Reject $H_0$.
+
+:::
+
+
+## Chi-squared Test - Example with R
+
+```{r, echo=TRUE}
+data = cbind(c(13,17),c(73,57)) # create data
+chisq.test(data, # table data
+           correct = FALSE # find p-value without Yates' correction
+           ) 
+chisq.test(data, # table data
+           correct = TRUE # find p-value with Yates' correction
+           ) 
+```
+
+- `Interpretation`: Fail to Reject $H_0$. There is evidence to support that the data is compatible with equal proportions $p-value=0.2$. 
+- Note: $T_{obs}^2 = (-1.2695)^2$ = `r {(-1.2695)^2}` 
 
