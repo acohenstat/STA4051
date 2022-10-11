@@ -799,13 +799,18 @@ probability of success
 <section id="sign-test---example-1" class="slide level2">
 <h2>Sign Test - Example</h2>
 <div class="r-fit-text">
-<ol type="1">
-<li>Define the null and alternative hypotheses <br> <code>Answer:</code> <span class="math display">\[ H_0: E(RTBL) = E(RTAL)\]</span> <span class="math display">\[H_1: E(RTBL) &lt; E(RTAL) \]</span> This is an upper-tailed test.</li>
-<li>Find the Test statistic observed and null distribution<br> <code>Answer:</code> <span class="math inline">\(T_{obs}=12\)</span> and <span class="math inline">\(T\sim bin(17,0.5)\)</span></li>
-<li>Determine critical values (rejection region) <br> <code>Answer:</code> 12</li>
-<li>Find P-value<br> <code>Answer:</code> p-value=0.0717316</li>
-<li>Decision and Interpretation <br> <code>Answer:</code> Since P-value &lt; 0.05 then Reject <span class="math inline">\(H_0\)</span>.</li>
-</ol>
+<p><code>Solution</code></p>
+<ul>
+<li>Define the null and alternative hypotheses</li>
+</ul>
+<p><span class="math display">\[ H_0: E(RTBL) \leq E(RTAL) \text{ OR } P(+) \leq P(-) \]</span> <span class="math display">\[H_1: E(RTBL) &lt; E(RTAL) \text{ OR } P(+) &gt; P(-) \]</span></p>
+<p>This is an upper-tailed test.</p>
+<ul>
+<li><p>Test statistic: <span class="math inline">\(T_{obs}=12\)</span> and <span class="math inline">\(T\sim bin(17,0.5)\)</span></p></li>
+<li><p>Determine critical values (rejection region): t = 12</p></li>
+<li><p>p-value=0.0717316</p></li>
+<li><p>Decision: P-value &lt; 0.05 then Reject <span class="math inline">\(H_0\)</span>.</p></li>
+</ul>
 </div>
 </section>
 <section id="sign-test---example-r" class="slide level2">

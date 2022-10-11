@@ -429,18 +429,23 @@ then $n=17$
 ## Sign Test - Example
 
 ::: {.r-fit-text}
-1. Define the null and alternative hypotheses <br>
-`Answer:` $$ H_0: E(RTBL) = E(RTAL)$$ $$H_1: E(RTBL) < E(RTAL) $$
+
+`Solution`
+
+- Define the null and alternative hypotheses 
+
+$$ H_0: E(RTBL) \leq E(RTAL) \text{ OR } P(+) \leq P(-) $$ $$H_1: E(RTBL) < E(RTAL) \text{ OR } P(+) > P(-) $$
+
 This is an upper-tailed test.
-2. Find the Test statistic observed and null distribution<br>
-`Answer:` $T_{obs}=12$ and $T\sim bin(17,0.5)$
-3. Determine critical values (rejection region) <br>
-`Answer:` `r {17-qbinom(0.05,17,0.5)}`
-4. Find P-value<br>
-`Answer:` p-value=`r {pbinom(11,17,0.5,lower.tail=F)}`
-5. Decision and Interpretation
-<br>
-`Answer:` Since P-value < 0.05 then Reject $H_0$.
+
+- Test statistic: $T_{obs}=12$ and $T\sim bin(17,0.5)$
+
+- Determine critical values (rejection region): t = `r {17-qbinom(0.05,17,0.5)}`
+
+- p-value=`r {pbinom(11,17,0.5,lower.tail=F)}`
+
+- Decision: P-value < 0.05 then Reject $H_0$.
+
 :::
 
 
