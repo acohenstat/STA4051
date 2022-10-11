@@ -866,6 +866,7 @@ P(X_{(r)} \leq \text{a fraction q of the population} \leq X_{(n+m-1)}) \geq 1-\a
 <li><span class="math inline">\(q\)</span> = 0.8</li>
 </ul>
 <p>To answer the question we need to find <span class="math inline">\(n\)</span></p>
+<h4 id="r-code">R code</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>n<span class="ot">=</span> <span class="fl">0.25</span><span class="sc">*</span><span class="fu">qchisq</span>(<span class="fl">0.9</span>,<span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">+</span><span class="dv">1</span>))<span class="sc">*</span>(<span class="dv">1</span><span class="fl">+0.8</span>)<span class="sc">/</span>(<span class="dv">1</span><span class="fl">-0.8</span>) <span class="sc">+</span> <span class="fl">0.5</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">+</span><span class="dv">1-1</span>)</span>
 <span id="cb13-2"><a href="#cb13-2"></a>n</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -874,7 +875,7 @@ P(X_{(r)} \leq \text{a fraction q of the population} \leq X_{(n+m-1)}) \geq 1-\a
 </div>
 </div>
 <p>Next, we need to randomly pick 18 people from the population of potential buyers and collect their adjustments.</p>
-<h4 id="r-code">R code</h4>
+<h4 id="r-code-with-tolerance-package">R code with tolerance package</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co">#install.packages("tolerance") # install package</span></span>
 <span id="cb15-2"><a href="#cb15-2"></a><span class="fu">library</span>(tolerance)</span>
@@ -1053,7 +1054,7 @@ P(X_{(r)} \leq \text{a fraction q of the population} \leq X_{(n+m-1)}) \geq 1-\a
 <li>Find the Test statistic observed and null distribution<br> <code>Answer:</code> <span class="math inline">\(T_{obs}=-1.2695\)</span> and <span class="math inline">\(T\sim N(0,1)\)</span></li>
 <li>Determine critical values (rejection region) <br> <code>Answer:</code> +/- -1.959964</li>
 <li>Find P-value<br> <code>Answer:</code> p-value=0.2042628</li>
-<li>Decision and Interpretation <br> <code>Answer:</code> Since P-value &gt; 0.05 then Fail to Reject <span class="math inline">\(H_0\)</span>.</li>
+<li>Decision <br> <code>Answer:</code> Since P-value &gt; 0.05 then Fail to Reject <span class="math inline">\(H_0\)</span>.</li>
 </ol>
 </div>
 </section>
@@ -1268,7 +1269,7 @@ X-squared = 1.1372, df = 1, p-value = 0.2863</code></pre>
 <li>Define the null and alternative hypotheses <br> <code>Answer:</code> <span class="math display">\[ H_0: p_1 \geq p_2 \]</span> <span class="math display">\[H_1: p_1 &lt; p_2 \]</span> This is an lower-tailed test.</li>
 <li>Find the Test statistic observed and null distribution<br> <code>Answer:</code> <span class="math inline">\(T_{obs}=X=1\)</span> and <span class="math inline">\(T\sim hypergeometric(14,10,4)\)</span>`</li>
 <li>Find P-value<br> <code>Answer:</code> p-value=0.040959</li>
-<li>Decision and Interpretation <br> <code>Answer:</code> Since P-value &gt; 0.05 then Fail to Reject <span class="math inline">\(H_0\)</span>.</li>
+<li>Decision and Interpretation <br> <code>Answer:</code> Since P-value &lt; 0.05 then Reject <span class="math inline">\(H_0\)</span>.</li>
 </ol>
 </div>
 </section>
@@ -1297,12 +1298,13 @@ odds ratio
 </section>
 <section id="the-median-test" class="slide level2">
 <h2>The Median Test</h2>
+<div class="r-fit-text">
 <p>Test for equal medians.</p>
 <p><span class="math display">\[H_0:  \text{All C populations have the same median} \]</span></p>
-<p><span class="math display">\[H_1:  \text{At least two populations have the different medians} \]</span></p>
+<p><span class="math display">\[H_1:  \text{At least two populations have different medians} \]</span></p>
 <p><code>Data</code></p>
 <ul>
-<li>C random samples and independent</li>
+<li>C random samples are independent</li>
 <li>Arrange the data as follows:
 <ul>
 <li>Find the Grand Median (GM), that is the median of the combined samples.</li>
@@ -1347,6 +1349,7 @@ odds ratio
 </tr>
 </tbody>
 </table>
+</div>
 </section>
 <section id="the-median-test-1" class="slide level2">
 <h2>The Median Test</h2>
@@ -1354,7 +1357,7 @@ odds ratio
 <li><code>Test Statistic</code></li>
 </ul>
 <p><span class="math display">\[ T = \frac{N^2}{ab} \sum_{i=1}^{C} \frac{O^2_{1i}}{n_i}  - \frac{Na}{b} \]</span></p>
-<p>Under Null hypothesis: <span class="math inline">\(T \sim \chi^2_{C-1}\)</span></p>
+<p>Under Null hypothesis: <span class="math inline">\(T \sim \chi^2_{C-1}\)</span>; a chi-square distribution with C-1 degrees of freedom.</p>
 <ul>
 <li><p><code>P-value</code> <span class="math inline">\(=P(T \geq T_{obs})\)</span></p></li>
 <li><p><code>Decision</code>: IF p_value &lt; <span class="math inline">\(\alpha\)</span> then REJECT <span class="math inline">\(H_0\)</span></p></li>
@@ -1367,16 +1370,20 @@ odds ratio
 <li>The yield per acre is measured and compared across the 4 methods.</li>
 </ul>
 <p><code>Question</code>: Do the medians yield per acre differ across the 4 methods.</p>
+</section>
+<section id="the-median-test---example-1" class="slide level2">
+<h2>The Median Test - Example</h2>
 <div class="r-fit-text">
 <ol type="1">
-<li>Define the null and alternative hypotheses <code>Answer:</code> <span class="math display">\[H_0:  \text{All methods have the same median yield per acre} \]</span></li>
+<li>Define the null and alternative hypotheses</li>
 </ol>
-<p><span class="math display">\[H_0:  \text{At least two of the methods medians differ} \]</span></p>
-<p>Set up data: See lecture notes</p>
-<ul>
-<li><code>Test statistic</code>:</li>
-</ul>
-<p><span class="math inline">\(T_{obs}\)</span> = 17.6</p>
+<p><span class="math display">\[H_0:  \text{All methods have the same median yield per acre} \]</span></p>
+<p><span class="math display">\[H_1:  \text{At least two of the methods medians differ} \]</span></p>
+<ol start="2" type="1">
+<li><p>Set up data: See lecture notes</p></li>
+<li><p><code>Test statistic</code>:</p></li>
+</ol>
+<p><span class="math display">\[T_{obs} = 17.6\]</span></p>
 <p>Under Null hypothesis: <span class="math inline">\(T \sim \chi^2_{3}\)</span></p>
 </div>
 </section>
