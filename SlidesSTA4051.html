@@ -385,6 +385,7 @@
 
 <section id="title-slide" class="center">
   <h1 class="title">STA 4051 Nonparametric Statistics</h1>
+  <p class="subtitle">Dr.&nbsp;Cohen</p>
 </section>
 
 <section id="welcome-to-sta-4051" class="slide level2">
@@ -736,8 +737,8 @@ probability of success
 <section id="sign-test-3" class="slide level2">
 <h2>Sign Test</h2>
 <p><code>4.Hypothesis: Two-tailed test</code></p>
-<p><span class="math display">\[ H_0:E(X_i) = E(Y_i) \]</span></p>
-<p><span class="math display">\[H_1: E(X_i) \neq E(Y_i) \]</span></p>
+<p><span class="math display">\[ H_0:E(X_i) = E(Y_i) \text{ or } P(+) = P(-) \]</span></p>
+<p><span class="math display">\[H_1: E(X_i) \neq E(Y_i) \text{ or } P(+) \neq P(-) \]</span></p>
 <ul>
 <li>The rejection region is defined by <span class="math inline">\(t\)</span> and <span class="math inline">\(n-t\)</span> where:</li>
 </ul>
@@ -750,8 +751,8 @@ probability of success
 <section id="sign-test-4" class="slide level2">
 <h2>Sign Test</h2>
 <p><code>4.Hypothesis: Upper-tailed test</code></p>
-<p><span class="math display">\[ H_0:E(X_i) \geq E(Y_i) \]</span></p>
-<p><span class="math display">\[H_1: E(X_i) &lt; E(Y_i) \]</span></p>
+<p><span class="math display">\[ H_0:E(X_i) \geq E(Y_i) \text{ or } P(+) \leq P(-) \]</span></p>
+<p><span class="math display">\[H_1: E(X_i) &lt; E(Y_i) \text{ or } P(+) &gt; P(-) \]</span></p>
 <ul>
 <li>The rejection region is defined by <span class="math inline">\(n-t\)</span> as follows:</li>
 </ul>
@@ -764,8 +765,8 @@ probability of success
 <section id="sign-test-5" class="slide level2">
 <h2>Sign Test</h2>
 <p><code>4.Hypothesis: Lower-tailed test</code></p>
-<p><span class="math display">\[ H_0:E(X_i) \leq E(Y_i) \]</span></p>
-<p><span class="math display">\[H_1: E(X_i) &gt; E(Y_i) \]</span></p>
+<p><span class="math display">\[ H_0:E(X_i) \leq E(Y_i) \text{ or } P(+) \geq P(-) \]</span></p>
+<p><span class="math display">\[H_1: E(X_i) &gt; E(Y_i)  \text{ or } P(+) &lt; P(-)\]</span></p>
 <ul>
 <li>The rejection region is defined by <span class="math inline">\(t\)</span> where:</li>
 </ul>
@@ -779,13 +780,13 @@ probability of success
 <h2>Sign Test - Example</h2>
 <div class="r-fit-text">
 <ul>
-<li>18 office workers.</li>
-<li>We are interested in comparing the reaction time before lunch (RTBL) vs the reaction time after lunch (RTAL).</li>
+<li>We are interested in comparing the reaction time before lunch (RTBL) vs the reaction time after lunch (RTAL) using a sample of 18 office workers.</li>
 <li>12 found their RTBL was shorter</li>
 <li>1 could not detect a difference</li>
-<li>Is the RTAL significantly longer than RTBL?<br></li>
 </ul>
-<p><code>Answer</code> We have <span class="math inline">\(n'=18\)</span> pairs, each one for a worker:</p>
+<p><code>Question:</code> Is the RTAL significantly longer than RTBL?</p>
+<p><code>Solution:</code></p>
+<p>We have <span class="math inline">\(n'=18\)</span> pairs, each one for a worker:</p>
 <p><span class="math display">\[ (RTBL,RTAL) = (X,Y)\]</span></p>
 <ul>
 <li><code>"+"</code> if <span class="math inline">\(RTBL &lt; RTAL\)</span> (12)</li>
@@ -807,8 +808,8 @@ probability of success
 </ol>
 </div>
 </section>
-<section id="sign-test---example-2" class="slide level2">
-<h2>Sign Test - Example</h2>
+<section id="sign-test---example-r" class="slide level2">
+<h2>Sign Test - Example R</h2>
 <p><code>Solution</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a> <span class="fu">binom.test</span>(<span class="at">x =</span> <span class="dv">12</span>,</span>
@@ -857,6 +858,7 @@ P(X_{(r)} \leq \text{a fraction q of the population} \leq X_{(n+m-1)}) \geq 1-\a
 </section>
 <section id="tolerance-limits---example" class="slide level2">
 <h2>Tolerance limits - Example</h2>
+<div class="r-fit-text">
 <p>Electric seat adjusters for a luxury car manufacturer wants to know what <code>range</code> of vertical adjustment is needed to be <span class="math inline">\(90\%\)</span> sure that at least <span class="math inline">\(80\%\)</span> of population of potential buyers will be able to adjust their seat.</p>
 <ul>
 <li>Range: r=1, m=1</li>
@@ -872,6 +874,19 @@ P(X_{(r)} \leq \text{a fraction q of the population} \leq X_{(n+m-1)}) \geq 1-\a
 </div>
 </div>
 <p>Next, we need to randomly pick 18 people from the population of potential buyers and collect their adjustments.</p>
+<h4 id="r-code">R code</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co">#install.packages("tolerance") # install package</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">library</span>(tolerance)</span>
+<span id="cb15-3"><a href="#cb15-3"></a></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="co"># How to find Q</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="fu">distfree.est</span>(<span class="at">n =</span> <span class="cn">NULL</span>, <span class="co"># to find sample size</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a>             <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="co"># 1-alpha is the confidence</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a>             <span class="at">P=</span> <span class="fl">0.8</span>, <span class="co"># fraction of the population </span></span>
+<span id="cb15-8"><a href="#cb15-8"></a>             <span class="at">side =</span> <span class="dv">2</span> <span class="co"># two sided interval</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a>               )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
 </section>
 <section id="contingency-tables" class="slide level2">
 <h2>Contingency Tables</h2>
@@ -908,8 +923,9 @@ P(X_{(r)} \leq \text{a fraction q of the population} \leq X_{(n+m-1)}) \geq 1-\a
 </table>
 <p>2 x 2 contingency table</p>
 </section>
-<section id="contingency-tables---chi-squared-test-for-differences-in-probabilities" class="slide level2">
-<h2>Contingency Tables - Chi-squared Test for differences in Probabilities</h2>
+<section id="contingency-tables-1" class="slide level2">
+<h2>Contingency Tables</h2>
+<h3 id="chi-squared-test-for-differences-in-probabilities">Chi-squared Test for differences in Probabilities</h3>
 <p><code>Data</code></p>
 <table>
 <thead>
@@ -949,14 +965,16 @@ P(X_{(r)} \leq \text{a fraction q of the population} \leq X_{(n+m-1)}) \geq 1-\a
 <li>Each observation can be classified into class 1 and class 2</li>
 </ul>
 </section>
-<section id="contingency-tables---chi-squared-test-for-differences-in-probabilities-1" class="slide level2">
-<h2>Contingency Tables - Chi-squared Test for differences in Probabilities</h2>
+<section id="contingency-tables-2" class="slide level2">
+<h2>Contingency Tables</h2>
+<h3 id="chi-squared-test-for-differences-in-probabilities-1">Chi-squared Test for differences in Probabilities</h3>
 <p><code>Test Statistic</code></p>
 <p><span class="math display">\[ T= \frac{\sqrt{N} (ad - bc)}{\sqrt{n_1n_2c_1c_1}}\]</span></p>
 <p><code>Null distirbution</code>: <span class="math inline">\(T \sim N(0,1)\)</span></p>
 </section>
-<section id="contingency-tables---chi-squared-test-for-differences-in-probabilities-2" class="slide level2">
-<h2>Contingency Tables - Chi-squared Test for differences in Probabilities</h2>
+<section id="contingency-tables-3" class="slide level2">
+<h2>Contingency Tables</h2>
+<h3 id="chi-squared-test-for-differences-in-probabilities-2">Chi-squared Test for differences in Probabilities</h3>
 <p><code>Hypothesis: Two-tailed test</code></p>
 <p><span class="math display">\[ H_0:p_1 = p_2 \]</span></p>
 <p><span class="math display">\[H_1: p_1 \neq p_2 \]</span></p>
@@ -966,8 +984,9 @@ P(X_{(r)} \leq \text{a fraction q of the population} \leq X_{(n+m-1)}) \geq 1-\a
 <li><p><code>Decision</code>: IF p_value &lt; <span class="math inline">\(\alpha\)</span> then REJECT <span class="math inline">\(H_0\)</span></p></li>
 </ul>
 </section>
-<section id="contingency-tables---chi-squared-test-for-differences-in-probabilities-3" class="slide level2">
-<h2>Contingency Tables - Chi-squared Test for differences in Probabilities</h2>
+<section id="contingency-tables-4" class="slide level2">
+<h2>Contingency Tables</h2>
+<h3 id="chi-squared-test-for-differences-in-probabilities-3">Chi-squared Test for differences in Probabilities</h3>
 <p><code>Hypothesis: Lower-tailed test</code></p>
 <p><span class="math display">\[ H_0:p_1 = p_2 \]</span></p>
 <p><span class="math display">\[H_1: p_1 &lt; p_2 \]</span></p>
@@ -977,8 +996,9 @@ P(X_{(r)} \leq \text{a fraction q of the population} \leq X_{(n+m-1)}) \geq 1-\a
 <li><p><code>Decision</code>: IF p_value &lt; <span class="math inline">\(\alpha\)</span> then REJECT <span class="math inline">\(H_0\)</span></p></li>
 </ul>
 </section>
-<section id="contingency-tables---chi-squared-test-for-differences-in-probabilities-4" class="slide level2">
-<h2>Contingency Tables - Chi-squared Test for differences in Probabilities</h2>
+<section id="contingency-tables-5" class="slide level2">
+<h2>Contingency Tables</h2>
+<h3 id="chi-squared-test-for-differences-in-probabilities-4">Chi-squared Test for differences in Probabilities</h3>
 <p><code>Hypothesis: Upper-tailed test</code></p>
 <p><span class="math display">\[ H_0:p_1 = p_2 \]</span></p>
 <p><span class="math display">\[H_1: p_1 &gt; p_2 \]</span></p>
@@ -988,8 +1008,8 @@ P(X_{(r)} \leq \text{a fraction q of the population} \leq X_{(n+m-1)}) \geq 1-\a
 <li><p><code>Decision</code>: IF p_value &lt; <span class="math inline">\(\alpha\)</span> then REJECT <span class="math inline">\(H_0\)</span></p></li>
 </ul>
 </section>
-<section id="chi-squared-test---example" class="slide level2">
-<h2>Chi-squared Test - Example</h2>
+<section id="chi-squared-test---example-1" class="slide level2">
+<h2>Chi-squared Test - Example 1</h2>
 <p>The number of items in two car loads.</p>
 <p><code>Data</code></p>
 <table>
@@ -1023,10 +1043,10 @@ P(X_{(r)} \leq \text{a fraction q of the population} \leq X_{(n+m-1)}) \geq 1-\a
 </tbody>
 </table>
 <p>2 x 2 contingency table</p>
-<p><code>Question</code>: Test whether there are difference in proportions of defective items between the two carloads.</p>
+<p><code>Question</code>: Test whether there are differences in proportions of defective items between the two carloads.</p>
 </section>
-<section id="chi-squared-test---example-1" class="slide level2">
-<h2>Chi-squared Test - Example</h2>
+<section id="chi-squared-test---example-1-1" class="slide level2">
+<h2>Chi-squared Test - Example 1</h2>
 <div class="r-fit-text">
 <ol type="1">
 <li>Define the null and alternative hypotheses <br> <code>Answer:</code> <span class="math display">\[ H_0: p_1 = p_2 \]</span> <span class="math display">\[H_1: p_1 \neq p_2 \]</span> This is an two-tailed test.</li>
@@ -1037,13 +1057,13 @@ P(X_{(r)} \leq \text{a fraction q of the population} \leq X_{(n+m-1)}) \geq 1-\a
 </ol>
 </div>
 </section>
-<section id="chi-squared-test---example-with-r" class="slide level2">
-<h2>Chi-squared Test - Example with R</h2>
+<section id="chi-squared-test---example-1-with-r" class="slide level2">
+<h2>Chi-squared Test - Example 1 with R</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>data <span class="ot">=</span> <span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">13</span>,<span class="dv">17</span>),<span class="fu">c</span>(<span class="dv">73</span>,<span class="dv">57</span>)) <span class="co"># create data</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">chisq.test</span>(data, <span class="co"># table data</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a>           <span class="at">correct =</span> <span class="cn">FALSE</span> <span class="co"># find p-value without Yates' correction</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a>           ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>data <span class="ot">=</span> <span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">13</span>,<span class="dv">17</span>),<span class="fu">c</span>(<span class="dv">73</span>,<span class="dv">57</span>)) <span class="co"># create data</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="fu">chisq.test</span>(data, <span class="co"># table data</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>           <span class="at">correct =</span> <span class="cn">FALSE</span> <span class="co"># find p-value without Yates' correction</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>           ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
@@ -1051,9 +1071,9 @@ P(X_{(r)} \leq \text{a fraction q of the population} \leq X_{(n+m-1)}) \geq 1-\a
 data:  data
 X-squared = 1.6116, df = 1, p-value = 0.2043</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">chisq.test</span>(data, <span class="co"># table data</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a>           <span class="at">correct =</span> <span class="cn">TRUE</span> <span class="co"># find p-value with Yates' correction</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a>           ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">chisq.test</span>(data, <span class="co"># table data</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>           <span class="at">correct =</span> <span class="cn">TRUE</span> <span class="co"># find p-value with Yates' correction</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a>           ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test with Yates' continuity correction
@@ -1066,8 +1086,346 @@ X-squared = 1.1372, df = 1, p-value = 0.2863</code></pre>
 <li><code>Interpretation</code>: Fail to Reject <span class="math inline">\(H_0\)</span>. There is evidence to support that the data is compatible with equal proportions <span class="math inline">\(p-value=0.2\)</span>.</li>
 <li>Note: <span class="math inline">\(T_{obs}^2 = (-1.2695)^2\)</span> = 1.6116303</li>
 </ul>
-<div class="footer footer-default">
-<p>STA4051 - Nonparametric Statistics - Dr.&nbsp;Cohen</p>
+</section>
+<section id="chi-squared-test---example-2" class="slide level2">
+<h2>Chi-squared Test - Example 2</h2>
+<p>A new toothpaste is tested for men and women preferences.</p>
+<p><code>Data</code></p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Like</th>
+<th style="text-align: center;">Do not like</th>
+<th style="text-align: center;"><code>Totals</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Men</strong></td>
+<td style="text-align: center;">a =64</td>
+<td style="text-align: center;">b=36</td>
+<td style="text-align: center;"><span class="math inline">\(n_1\)</span> = 100</td>
+</tr>
+<tr class="even">
+<td><strong>Women</strong></td>
+<td style="text-align: center;">c = 74</td>
+<td style="text-align: center;">d=26</td>
+<td style="text-align: center;"><span class="math inline">\(n_2\)</span> = 100</td>
+</tr>
+<tr class="odd">
+<td><strong><code>Totals</code></strong></td>
+<td style="text-align: center;"><span class="math inline">\(c_1\)</span> = 138</td>
+<td style="text-align: center;"><span class="math inline">\(c_2\)</span>= 62</td>
+<td style="text-align: center;">N = 200</td>
+</tr>
+</tbody>
+</table>
+<p>2 x 2 contingency table</p>
+<p><code>Question</code>: Do men and women differ in their preferences regarding the new toothpaste?</p>
+</section>
+<section id="chi-squared-test---example-2-1" class="slide level2">
+<h2>Chi-squared Test - Example 2</h2>
+<div class="r-fit-text">
+<ol type="1">
+<li>Define the null and alternative hypotheses <br> <code>Answer:</code> <span class="math display">\[ H_0: p_1 = p_2 \]</span> <span class="math display">\[H_1: p_1 \neq p_2 \]</span> This is an two-tailed test.</li>
+<li>Find the Test statistic observed and null distribution<br> <code>Answer:</code> <span class="math inline">\(T_{obs}=-1.53\)</span> and <span class="math inline">\(T\sim N(0,1)\)</span></li>
+<li>Determine critical values (rejection region) <br> <code>Answer:</code> +/- -1.959964</li>
+<li>Find P-value<br> <code>Answer:</code> p-value=0.1260167</li>
+<li>Decision and Interpretation <br> <code>Answer:</code> Since P-value &gt; 0.05 then Fail to Reject <span class="math inline">\(H_0\)</span>.</li>
+</ol>
+<p>There is insufficient evidence to support that men and women differ in their preferences regarding the new toothpaste.</p>
+</div>
+</section>
+<section id="contingency-tables-6" class="slide level2">
+<h2>Contingency Tables</h2>
+<h3 id="fishers-exact-test">Fisher’s Exact Test</h3>
+<p><code>Data</code></p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">col 1</th>
+<th style="text-align: center;">col 2</th>
+<th style="text-align: center;"><code>Totals</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>row 1</strong></td>
+<td style="text-align: center;">X (<span class="math inline">\(p_1\)</span>)</td>
+<td style="text-align: center;">r-X</td>
+<td style="text-align: center;">r</td>
+</tr>
+<tr class="even">
+<td><strong>row 2</strong></td>
+<td style="text-align: center;">c-X (<span class="math inline">\(p_2\)</span>)</td>
+<td style="text-align: center;">N-r-c+X</td>
+<td style="text-align: center;">N-r</td>
+</tr>
+<tr class="odd">
+<td><strong><code>Totals</code></strong></td>
+<td style="text-align: center;">c</td>
+<td style="text-align: center;">N-c</td>
+<td style="text-align: center;">N</td>
+</tr>
+</tbody>
+</table>
+<p>2 x 2 contingency table</p>
+<p><code>Assumption</code></p>
+<ul>
+<li>Each observation can be in one cell</li>
+<li>The row and column totals are fixed.</li>
+</ul>
+</section>
+<section id="contingency-tables-7" class="slide level2">
+<h2>Contingency Tables</h2>
+<h3 id="fishers-exact-test-1">Fisher’s Exact Test</h3>
+<p><code>Test Statistic</code></p>
+<p>T = X = number of obs. in row 1 and col 1.</p>
+<p><span class="math display">\[ T (H_0) \sim hypergeometric(N,r,C) \]</span></p>
+<p>The PMF is:</p>
+<p><span class="math display">\[ P(T=x) = \frac{\binom{r}{x}\binom{N-r}{c-x}}{\binom{N}{c}} \]</span></p>
+<p>x=0,1,2,…,min(r,m)</p>
+</section>
+<section id="contingency-tables-8" class="slide level2">
+<h2>Contingency Tables</h2>
+<h3 id="fishers-exact-test-2">Fisher’s Exact Test</h3>
+<p><code>Hypothesis: Two-tailed test</code></p>
+<p><span class="math display">\[ H_0:p_1 = p_2 \]</span></p>
+<p><span class="math display">\[H_1: p_1 \neq p_2 \]</span></p>
+<ul>
+<li><p><span class="math inline">\(p_1\)</span> the probability that a randomly selected obs from the row 1 will be in col 1.</p></li>
+<li><p><code>P-value</code><span class="math inline">\(= 2\times \min\{ P( T \leq T_{Obs}), P(T \geq T_{Obs}) \}\)</span></p></li>
+<li><p><code>Decision</code>: IF p_value &lt; <span class="math inline">\(\alpha\)</span> then REJECT <span class="math inline">\(H_0\)</span></p></li>
+</ul>
+</section>
+<section id="contingency-tables-9" class="slide level2">
+<h2>Contingency Tables</h2>
+<h3 id="fishers-exact-test-3">Fisher’s Exact Test</h3>
+<p><code>Hypothesis: Lower-tailed test</code></p>
+<p><span class="math display">\[ H_0:p_1 = p_2 \]</span></p>
+<p><span class="math display">\[H_1: p_1 &lt; p_2 \]</span></p>
+<ul>
+<li><p><span class="math inline">\(p_1\)</span> the probability that a randomly selected obs from the row 1 will be in col 1.</p></li>
+<li><p><code>P-value</code><span class="math inline">\(= P( T \leq T_{Obs})\)</span></p></li>
+<li><p><code>Decision</code>: IF p_value &lt; <span class="math inline">\(\alpha\)</span> then REJECT <span class="math inline">\(H_0\)</span></p></li>
+</ul>
+</section>
+<section id="contingency-tables-10" class="slide level2">
+<h2>Contingency Tables</h2>
+<h3 id="fishers-exact-test-4">Fisher’s Exact Test</h3>
+<p><code>Hypothesis: Upper-tailed test</code></p>
+<p><span class="math display">\[ H_0:p_1 = p_2 \]</span></p>
+<p><span class="math display">\[H_1: p_1 &gt; p_2 \]</span></p>
+<ul>
+<li><p><span class="math inline">\(p_1\)</span> the probability that a randomly selected obs from the row 1 will be in col 1.</p></li>
+<li><p><code>P-value</code><span class="math inline">\(= P( T \geq T_{Obs})\)</span></p></li>
+<li><p><code>Decision</code>: IF p_value &lt; <span class="math inline">\(\alpha\)</span> then REJECT <span class="math inline">\(H_0\)</span></p></li>
+</ul>
+</section>
+<section id="fishers-exact-test---example" class="slide level2">
+<h2>Fisher’s Exact Test - Example</h2>
+<p>14 newly hired business majors. - 10 males and 4 females - 2 Jobs are needed: 10 Tellers and 4 Account Rep.</p>
+<p><code>Data</code></p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Account Rep.</th>
+<th style="text-align: center;">Tellers</th>
+<th style="text-align: center;"><code>Totals</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Males </strong></td>
+<td style="text-align: center;">X=1</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">r = 10</td>
+</tr>
+<tr class="even">
+<td><strong>Females </strong></td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr class="odd">
+<td><strong><code>Totals</code></strong></td>
+<td style="text-align: center;">c= 4</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">N = 14</td>
+</tr>
+</tbody>
+</table>
+<p>2 x 2 contingency table</p>
+<p><code>Question</code>: Test if females are more likely than males to get the account Rep.&nbsp;job.</p>
+</section>
+<section id="fishers-exact-test---example-1" class="slide level2">
+<h2>Fisher’s Exact Test - Example</h2>
+<div class="r-fit-text">
+<ol type="1">
+<li>Define the null and alternative hypotheses <br> <code>Answer:</code> <span class="math display">\[ H_0: p_1 \geq p_2 \]</span> <span class="math display">\[H_1: p_1 &lt; p_2 \]</span> This is an lower-tailed test.</li>
+<li>Find the Test statistic observed and null distribution<br> <code>Answer:</code> <span class="math inline">\(T_{obs}=X=1\)</span> and <span class="math inline">\(T\sim hypergeometric(14,10,4)\)</span>`</li>
+<li>Find P-value<br> <code>Answer:</code> p-value=0.040959</li>
+<li>Decision and Interpretation <br> <code>Answer:</code> Since P-value &gt; 0.05 then Fail to Reject <span class="math inline">\(H_0\)</span>.</li>
+</ol>
+</div>
+</section>
+<section id="fishers-exact-test---example-with-r" class="slide level2">
+<h2>Fisher’s Exact Test - Example with R</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>data <span class="ot">=</span> <span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>),<span class="fu">c</span>(<span class="dv">9</span>,<span class="dv">1</span>)) <span class="co"># create data</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="fu">fisher.test</span>(data,<span class="at">alternative =</span> <span class="st">"l"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Fisher's Exact Test for Count Data
+
+data:  data
+p-value = 0.04096
+alternative hypothesis: true odds ratio is less than 1
+95 percent confidence interval:
+ 0.000000 0.897734
+sample estimates:
+odds ratio 
+0.05545513 </code></pre>
+</div>
+</div>
+<ul>
+<li><code>Interpretation</code>: Reject <span class="math inline">\(H_0\)</span>. There is evidence to support that the data is compatible with the assumption that females are more likely than males to get the account Rep.&nbsp;job.</li>
+</ul>
+</section>
+<section id="the-median-test" class="slide level2">
+<h2>The Median Test</h2>
+<p>Test for equal medians.</p>
+<p><span class="math display">\[H_0:  \text{All C populations have the same median} \]</span></p>
+<p><span class="math display">\[H_1:  \text{At least two populations have the different medians} \]</span></p>
+<p><code>Data</code></p>
+<ul>
+<li>C random samples and independent</li>
+<li>Arrange the data as follows:
+<ul>
+<li>Find the Grand Median (GM), that is the median of the combined samples.</li>
+<li>Set up a 2 by C contingency table as follows:</li>
+</ul></li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Sample 1</th>
+<th style="text-align: center;">Sample 2</th>
+<th style="text-align: center;">…</th>
+<th style="text-align: center;">Sample C</th>
+<th style="text-align: center;"><strong><code>Totals</code></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(&gt;\)</span> GM</td>
+<td style="text-align: center;"><span class="math inline">\(O_{11}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O_{12}\)</span></td>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;"><span class="math inline">\(O_{1C}\)</span></td>
+<td style="text-align: center;">a</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\leq\)</span> GM</td>
+<td style="text-align: center;"><span class="math inline">\(O_{21}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(O_{22}\)</span></td>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;"><span class="math inline">\(O_{2C}\)</span></td>
+<td style="text-align: center;">b</td>
+</tr>
+<tr class="odd">
+<td><strong><code>Totals</code></strong></td>
+<td style="text-align: center;"><span class="math inline">\(n_{1}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(n_{1}\)</span></td>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;"><span class="math inline">\(n_{C}\)</span></td>
+<td style="text-align: center;">N</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="the-median-test-1" class="slide level2">
+<h2>The Median Test</h2>
+<ul>
+<li><code>Test Statistic</code></li>
+</ul>
+<p><span class="math display">\[ T = \frac{N^2}{ab} \sum_{i=1}^{C} \frac{O^2_{1i}}{n_i}  - \frac{Na}{b} \]</span></p>
+<p>Under Null hypothesis: <span class="math inline">\(T \sim \chi^2_{C-1}\)</span></p>
+<ul>
+<li><p><code>P-value</code> <span class="math inline">\(=P(T \geq T_{obs})\)</span></p></li>
+<li><p><code>Decision</code>: IF p_value &lt; <span class="math inline">\(\alpha\)</span> then REJECT <span class="math inline">\(H_0\)</span></p></li>
+</ul>
+</section>
+<section id="the-median-test---example" class="slide level2">
+<h2>The Median Test - Example</h2>
+<ul>
+<li>4 methods of growing corn is used.</li>
+<li>The yield per acre is measured and compared across the 4 methods.</li>
+</ul>
+<p><code>Question</code>: Do the medians yield per acre differ across the 4 methods.</p>
+<div class="r-fit-text">
+<ol type="1">
+<li>Define the null and alternative hypotheses <code>Answer:</code> <span class="math display">\[H_0:  \text{All methods have the same median yield per acre} \]</span></li>
+</ol>
+<p><span class="math display">\[H_0:  \text{At least two of the methods medians differ} \]</span></p>
+<p>Set up data: See lecture notes</p>
+<ul>
+<li><code>Test statistic</code>:</li>
+</ul>
+<p><span class="math inline">\(T_{obs}\)</span> = 17.6</p>
+<p>Under Null hypothesis: <span class="math inline">\(T \sim \chi^2_{3}\)</span></p>
+</div>
+</section>
+<section id="the-median-test---example-r" class="slide level2">
+<h2>The Median Test - Example R</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># install.packages("agricolae")</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">library</span>(agricolae) <span class="co"># package</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="fu">data</span>(corn) <span class="co"># data</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a></span>
+<span id="cb22-6"><a href="#cb22-6"></a><span class="co"># The Median Test</span></span>
+<span id="cb22-7"><a href="#cb22-7"></a>median_test_out<span class="ot">=</span> <span class="fu">Median.test</span>(corn<span class="sc">$</span>observation,corn<span class="sc">$</span>method)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+The Median Test for corn$observation ~ corn$method 
+
+Chi Square = 17.54306   DF = 3   P.Value 0.00054637
+Median = 89 
+
+  Median  r Min Max   Q25   Q75
+1   91.0  9  83  96 89.00 92.00
+2   86.0 10  81  91 83.25 89.75
+3   95.0  7  91 101 93.50 98.00
+4   80.5  8  77  82 78.75 81.00
+
+Post Hoc Analysis
+
+Groups according to probability of treatment differences and alpha level.
+
+Treatments with the same letter are not significantly different.
+
+  corn$observation groups
+3             95.0      a
+1             91.0      b
+2             86.0      b
+4             80.5      c</code></pre>
+</div>
+</div>
+</section>
+<section id="the-median-test---example-r-1" class="slide level2">
+<h2>The Median Test - Example R</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># Visualization</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="fu">plot</span>(median_test_out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="SlidesSTA4051_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"><div class="footer footer-default">
+<p>STA4051 - Nonparametric Statistics</p>
 </div>
 </section>
     </div>
