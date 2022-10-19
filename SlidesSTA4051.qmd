@@ -903,6 +903,8 @@ median_test_out= Median.test(corn$observation,corn$method)
 
 ## The Median Test - Example R
 
+Multiple Comparison 
+
 ```{r}
 #| echo: true
 
@@ -910,5 +912,19 @@ median_test_out= Median.test(corn$observation,corn$method)
 plot(median_test_out)
 ```
 
+## Goodness-of-Fit Tests
+
+Test whether a sample is coming from a known distribution. For example, test the normality assumption.
+
+- Kolmogorov-Smirnov Test (KS)
+- Shapiro-Wilk Test (SW)
+- Chi-squared Test
 
 
+## Goodness-of-Fit Tests - KS
+
+Test whether a sample is coming from a known distribution. For example, test the normality assumption.
+
+- Kolmogorov-Smirnov Test 
+- Shapiro-Wilk Test 
+- Chi-squared Test 
