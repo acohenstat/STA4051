@@ -912,7 +912,7 @@ Multiple Comparison
 plot(median_test_out)
 ```
 
-## Goodness-of-Fit Tests
+## Goodness-of-Fit Tests - GOF
 
 Test whether a sample is coming from a known distribution. For example, test the normality assumption.
 
@@ -921,10 +921,94 @@ Test whether a sample is coming from a known distribution. For example, test the
 - Chi-squared Test
 
 
-## Goodness-of-Fit Tests - KS
+## Goodness-of-Fit Tests - GOF
 
-Test whether a sample is coming from a known distribution. For example, test the normality assumption.
+Test if `speed` data is normally distributed.
 
-- Kolmogorov-Smirnov Test 
-- Shapiro-Wilk Test 
-- Chi-squared Test 
+`Data`
+
+```{r}
+#| echo: true
+
+hist(cars$speed) # histogram of speed
+mean_speed = mean(cars$speed) # mean speed
+mean_speed
+sd_speed = sd(cars$speed) # standard deviation speed
+sd_speed
+```
+
+
+## Normality Test
+
+#### Shapiro Wilk Test  
+```{r}
+#| echo: true
+shapiro.test(cars$speed)
+```
+
+`Interpretation`: Fail to reject H0. There is evidence to support that data is normally distributed.
+
+#### Kolmogorov Smirnov Test
+
+```{r}
+#| echo: true
+ks.test(cars$speed,'pnorm',mean_speed,sd_speed)
+```
+
+`Interpretation`: Fail to reject H0. There is evidence to support that data is normally distributed.
+
+## Normality Test
+
+#### Chi-squared Test
+
+
+```{r}
+#| echo: true
+h = hist(cars$speed,plot = FALSE) # hist of data
+```
+
+```{r}
+#| echo: true
+Ob = h$counts # observed frequencies in classes
+Ob
+```
+
+```{r}
+#| echo: true
+p1 = pnorm(5,mean_speed,sd_speed)# P(X <= 5)
+p2 = pnorm(10,mean_speed,sd_speed)-pnorm(5,mean_speed,sd_speed) # P(5<=X <= 10)
+p3 = pnorm(15,mean_speed,sd_speed)-pnorm(10,mean_speed,sd_speed) # P(10<=X <= 15)
+p4 = pnorm(20,mean_speed,sd_speed)-pnorm(15,mean_speed,sd_speed) # P(15<=X <= 20)
+p5 = 1- pnorm(20,mean_speed,sd_speed) # P(X> 20)
+
+Pj = c(p1,p2,p3,p4,p5) # put everything in one array
+Pj
+sum(Pj) # should be equal to 1
+```
+
+
+```{r}
+#| echo: true
+Ej = Pj*50 # Expected counts
+Ej
+```
+
+
+## Normality Test
+
+#### Chi-squared Test
+
+```{r}
+#| echo: true
+# Chi-squared test for GOF
+chisq.test(x=Ob,p = Pj)
+```
+
+The degrees of freedom of the test is df=C-1-k=5-1-2=2. k=2 because we did estimate the mean and variance from the sample. We need to `recompute` the p-value.
+
+```{r}
+#| echo: true
+pvalue <- 1-pchisq(1.3267,df=2) # pvalue adjusted for the df
+pvalue
+```
+
