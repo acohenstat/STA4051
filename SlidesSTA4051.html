@@ -1554,6 +1554,76 @@ X-squared = 1.3267, df = 4, p-value = 0.8568</code></pre>
 <pre><code>[1] 0.5151228</code></pre>
 </div>
 </div>
+</section>
+<section id="tests-based-on-the-ranks" class="slide level2">
+<h2>Tests Based on the Ranks</h2>
+<h3 id="mann-whitney-test-wilcoxon-rank-sum-test">Mann-Whitney Test (Wilcoxon Rank Sum Test)</h3>
+<p><code>Data</code></p>
+<ul>
+<li><p>Two random samples are of interest here. Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be a random sample of size <span class="math inline">\(n\)</span> from population 1. And Let <span class="math inline">\(Y_1, Y_2, \ldots, Y_m\)</span> be a random sample of size <span class="math inline">\(m\)</span> from population 2.</p></li>
+<li><p>Assign ranks 1 to <span class="math inline">\(n+m\)</span> to the all observations and let <span class="math inline">\(R(X_i)\)</span> be the rank assigned to <span class="math inline">\(X_i\)</span>. The same let <span class="math inline">\(R(Y_i)\)</span> be the rank assigned to <span class="math inline">\(Y_i\)</span>. <span class="math inline">\(N=n+m\)</span>.</p></li>
+<li><p>If several samples values are exactly equal to each other (tied), assign to each their average of the ranks that would have been used to them if there had been no ties.</p></li>
+</ul>
+</section>
+<section id="mann-whitney-test-wilcoxon-rank-sum-test-1" class="slide level2">
+<h2>Mann-Whitney Test (Wilcoxon Rank Sum Test)</h2>
+<p><code>Assumptions</code></p>
+<ul>
+<li>Both samples are random samples.</li>
+<li>Mutual independence between the two samples</li>
+<li>At least ordinal</li>
+</ul>
+<p><code>Test Statistic</code></p>
+<ul>
+<li><p>If no ties: <span class="math inline">\(T = \sum_{i=1}^n R(X_i)\)</span></p></li>
+<li><p>If there are ties: <span class="math inline">\(T_1 = \frac{T - \frac{n(N+1)}{2}}{\sqrt{\frac{nm}{N(N-1)} \sum_{i=1}^N R^2_i -\frac{nm(N+1)^2}{4(N-1)}}}\)</span>, where <span class="math inline">\(\sum_{i=1}^N R^2_i\)</span> is the sum of the squares of all Ranks.</p></li>
+</ul>
+</section>
+<section id="mann-whitney-test-wilcoxon-rank-sum-test-2" class="slide level2">
+<h2>Mann-Whitney Test (Wilcoxon Rank Sum Test)</h2>
+<p><code>The null distribution</code> is approximated with the standard normal distribution for <span class="math inline">\(T_1\)</span>. However, <span class="math inline">\(T\)</span> has the exact distribution for small sample sizes <span class="math inline">\(&lt;20\)</span>.</p>
+<p><code>Hypotheses</code></p>
+<p>Let <span class="math inline">\(F(x)\)</span> be the distribution function corresponding to <span class="math inline">\(X\)</span>.</p>
+<p>Let <span class="math inline">\(G(x)\)</span> be the distribution function corresponding to <span class="math inline">\(Y\)</span>.</p>
+<ul>
+<li><code>Two-tailed test</code></li>
+</ul>
+<p><span class="math display">\[ H_0: F(x) = G(x) \quad \text{for all x} \]</span></p>
+<p><span class="math display">\[H_1: F(x) \neq G(x) \quad \text{for some x} \]</span></p>
+<p>The rejection region is defined by the quantiles <span class="math inline">\(T_{\alpha/2} (T_1)\)</span> and <span class="math inline">\(T_{1-\alpha/2} (T_1)\)</span>. <span class="math inline">\(\alpha\)</span> is the significance level.</p>
+</section>
+<section id="mann-whitney-test-wilcoxon-rank-sum-test-3" class="slide level2">
+<h2>Mann-Whitney Test (Wilcoxon Rank Sum Test)</h2>
+<ul>
+<li><code>Upper-tailed test</code></li>
+</ul>
+<p><span class="math display">\[ H_0: F(x) = G(x)\]</span></p>
+<p><span class="math display">\[H_1: E(X) &gt; E(Y)  \]</span></p>
+<p>Here <span class="math inline">\(X\)</span> tends to be greater than <span class="math inline">\(Y\)</span>.</p>
+<ul>
+<li><code>Lower-tailed test</code></li>
+</ul>
+<p><span class="math display">\[ H_0: F(x) = G(x)\]</span></p>
+<p><span class="math display">\[H_1: E(X) &lt; E(Y)  \]</span></p>
+<p>Here <span class="math inline">\(X\)</span> tends to be smaller than <span class="math inline">\(Y\)</span>.</p>
+</section>
+<section id="mann-whitney-test-wilcoxon-rank-sum-test---example-r" class="slide level2">
+<h2>Mann-Whitney Test (Wilcoxon Rank Sum Test) - Example R</h2>
+<p>High temperatures are randomly selected from days in a summer in 2 cities. <code>Question</code>: Test if the mean high temperature in city1 is higher than the mean high temperature in city2.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>temp_city1 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">83</span>,<span class="dv">91</span>,<span class="dv">89</span>,<span class="dv">89</span>,<span class="dv">94</span>,<span class="dv">96</span>,<span class="dv">91</span>,<span class="dv">92</span>,<span class="dv">90</span>)</span>
+<span id="cb47-2"><a href="#cb47-2"></a>temp_city2 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">78</span>,<span class="dv">82</span>,<span class="dv">81</span>,<span class="dv">77</span>,<span class="dv">79</span>,<span class="dv">81</span>,<span class="dv">80</span>,<span class="dv">81</span>)</span>
+<span id="cb47-3"><a href="#cb47-3"></a><span class="fu">wilcox.test</span>(temp_city1,temp_city2,<span class="at">alternative =</span> <span class="st">"g"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  temp_city1 and temp_city2
+W = 72, p-value = 0.0003033
+alternative hypothesis: true location shift is greater than 0</code></pre>
+</div>
+</div>
+<p>From the test above W=72. The relationship between W and T is given by <span class="math display">\[W= T-n(n+1)/2\]</span> For this example: <span class="math inline">\(W=117-9\times10/2=117-45=72\)</span>.</p>
 <div class="footer footer-default">
 <p>STA4051 - Nonparametric Statistics</p>
 </div>

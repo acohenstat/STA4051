@@ -1012,3 +1012,84 @@ pvalue <- 1-pchisq(1.3267,df=2) # pvalue adjusted for the df
 pvalue
 ```
 
+## Tests Based on the Ranks
+
+### Mann-Whitney Test (Wilcoxon Rank Sum Test)
+
+
+`Data`
+
+- Two random samples are of interest here. Let $X_1, X_2, \ldots, X_n$ be a random sample of size $n$ from population 1. And Let $Y_1, Y_2, \ldots, Y_m$ be a random sample of size $m$ from population 2.
+
+- Assign ranks 1 to $n+m$ to the all observations and let $R(X_i)$ be the rank assigned to $X_i$. The same let $R(Y_i)$ be the rank assigned to $Y_i$. $N=n+m$.
+
+- If several samples values are exactly equal to each other (tied), assign to each their average of the ranks that would have been used to them if there had been no ties.
+
+
+## Mann-Whitney Test (Wilcoxon Rank Sum Test)
+
+`Assumptions`
+
+- Both samples are random samples.
+- Mutual independence between the two samples
+- At least ordinal
+
+`Test Statistic`
+
+- If no ties:
+$T = \sum_{i=1}^n R(X_i)$
+
+- If there are ties: $T_1 = \frac{T - \frac{n(N+1)}{2}}{\sqrt{\frac{nm}{N(N-1)} \sum_{i=1}^N R^2_i -\frac{nm(N+1)^2}{4(N-1)}}}$, where $\sum_{i=1}^N R^2_i$ is the sum of the squares of all Ranks.
+
+## Mann-Whitney Test (Wilcoxon Rank Sum Test)
+
+
+`The null distribution` is approximated with the standard normal distribution for $T_1$. However, $T$ has the exact distribution for small sample sizes $<20$.
+
+`Hypotheses`
+
+Let $F(x)$ be the distribution function corresponding to $X$.
+
+Let $G(x)$ be the distribution function corresponding to $Y$.
+
+- `Two-tailed test`
+$$ H_0: F(x) = G(x) \quad \text{for all x} $$ 
+$$H_1: F(x) \neq G(x) \quad \text{for some x} $$ 
+
+The rejection region is defined by the quantiles $T_{\alpha/2} (T_1)$ and $T_{1-\alpha/2} (T_1)$. $\alpha$ is the significance level.
+
+
+
+## Mann-Whitney Test (Wilcoxon Rank Sum Test)
+
+
+- `Upper-tailed test ` 
+
+$$ H_0: F(x) = G(x)$$ 
+$$H_1: E(X) > E(Y)  $$ 
+Here $X$ tends to be greater than $Y$.
+
+
+- `Lower-tailed test`
+$$ H_0: F(x) = G(x)$$ 
+$$H_1: E(X) < E(Y)  $$ 
+Here $X$ tends to be smaller than $Y$.
+
+
+
+## Mann-Whitney Test (Wilcoxon Rank Sum Test) - Example R
+
+High temperatures are randomly selected from days in a summer in 2 cities.
+`Question`: Test if the mean high temperature in city1 is higher than the mean high temperature in city2.
+
+```{r}
+#| echo: true
+temp_city1 = c(83,91,89,89,94,96,91,92,90)
+temp_city2 = c(78,82,81,77,79,81,80,81)
+wilcox.test(temp_city1,temp_city2,alternative = "g")
+```
+
+
+
+From the test above W=72. The relationship between W and T is given by $$W= T-n(n+1)/2$$ For this example: $W=117-9\times10/2=117-45=72$.
+
