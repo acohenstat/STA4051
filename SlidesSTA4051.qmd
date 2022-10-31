@@ -1016,6 +1016,8 @@ pvalue
 
 ### Mann-Whitney Test (Wilcoxon Rank Sum Test)
 
+Comparing two independent samples.
+
 
 `Data`
 
@@ -1080,7 +1082,96 @@ Here $X$ tends to be smaller than $Y$.
 ## Mann-Whitney Test (Wilcoxon Rank Sum Test) - Example R
 
 High temperatures are randomly selected from days in a summer in 2 cities.
+
 `Question`: Test if the mean high temperature in city1 is higher than the mean high temperature in city2.
+
+```{r}
+#| echo: true
+temp_city1 = c(83,91,89,89,94,96,91,92,90)
+temp_city2 = c(78,82,81,77,79,81,80,81)
+wilcox.test(temp_city1,temp_city2,alternative = "g")
+```
+
+
+
+
+
+
+
+## Tests Based on the Ranks
+
+### Wilcoxon Signed Ranks Test (paired data)
+
+Comparing two dependent samples. This test can be used as an alternative to the paired t-test when the assumptions are not met.
+
+
+`Data`
+
+- The data consists of observations on a bivariate random sample $(X_i, Y_i)$, where $n'$ is the number of the pairs observed. Find the differences $D_i=Y_i - X_i$. The absolute differences are:
+
+$$
+\mid D_i\mid = \mid Y_i - X_i \mid, \qquad i=1,2\ldots,n'
+$$
+
+- Omit the pairs where the difference is zero. Let $n$ be the remaining pairs. Ranks from 1 to $n$ are assigned to the $n$ pairs according to $\mid D_i\mid$.
+
+- If several samples values are exactly equal to each other (tied), assign to each their average of the ranks that would have been used to them if there had been no ties.
+
+
+
+
+## Wilcoxon Signed Ranks Test (paired data)
+
+`Test Statistic`
+
+Let $R_i$ called the signed rank be defined for each pair $(X_i, Y_i)$ as follows: the rank is positive if the D is positive, and negative if the difference D is negative. 
+
+
+- If no ties: 
+$ T^+ = \sum (R_i \text{where} D_i \text{is positive}) \sim$. Tables for exact lower quantiles, under $H_0$, exist. The upper quantile is given: $w_p = n(n+1)/2 - w_{1-p}$. We will use R.
+
+- If there are ties or $n>50$: $ T = \frac{\sum_{i=1}^n R_i}{\sqrt{\sum_{i=1}^n R_i^2}}\sim$ Standard normal distribution, under $H_0$.
+
+## Wilcoxon Signed Ranks Test (paired data)
+
+`Hypotheses`
+
+
+- `Two-tailed test`
+$$ H_0: E(D) = 0 $$ 
+$$H_1: E(D) \neq 0 $$ 
+
+The rejection region is defined by the quantiles $T^+_{\alpha/2} (or T)$ and $T^+_{1-\alpha/2} (or T)$. $\alpha$ is the significance level.
+
+
+
+
+## Wilcoxon Signed Ranks Test (paired data)
+
+
+- `Upper-tailed test ` 
+
+
+$$ H_0: E(D) \leq 0$$ 
+$$H_1: E(D) > 0 $$ 
+
+The rejection region is defined by the quantiles $T^+_{1-\alpha} ( or T)$. $\alpha$ is the significance level.
+
+
+
+- `Lower-tailed test`
+$$ H_0:  E(D) \geq 0 $$ 
+$$H_1: E(D) <0  $$ 
+
+The rejection region is defined by the quantiles $T^+_{\alpha} (or T)$. $\alpha$ is the significance level.
+
+
+
+## Wilcoxon Signed Ranks Test - Example R
+
+High temperatures are randomly selected from days in a summer in 2 cities.
+
+`Question`: 
 
 ```{r}
 #| echo: true

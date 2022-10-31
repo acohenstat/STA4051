@@ -1558,6 +1558,7 @@ X-squared = 1.3267, df = 4, p-value = 0.8568</code></pre>
 <section id="tests-based-on-the-ranks" class="slide level2">
 <h2>Tests Based on the Ranks</h2>
 <h3 id="mann-whitney-test-wilcoxon-rank-sum-test">Mann-Whitney Test (Wilcoxon Rank Sum Test)</h3>
+<p>Comparing two independent samples.</p>
 <p><code>Data</code></p>
 <ul>
 <li><p>Two random samples are of interest here. Let <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> be a random sample of size <span class="math inline">\(n\)</span> from population 1. And Let <span class="math inline">\(Y_1, Y_2, \ldots, Y_m\)</span> be a random sample of size <span class="math inline">\(m\)</span> from population 2.</p></li>
@@ -1609,11 +1610,80 @@ X-squared = 1.3267, df = 4, p-value = 0.8568</code></pre>
 </section>
 <section id="mann-whitney-test-wilcoxon-rank-sum-test---example-r" class="slide level2">
 <h2>Mann-Whitney Test (Wilcoxon Rank Sum Test) - Example R</h2>
-<p>High temperatures are randomly selected from days in a summer in 2 cities. <code>Question</code>: Test if the mean high temperature in city1 is higher than the mean high temperature in city2.</p>
+<p>High temperatures are randomly selected from days in a summer in 2 cities.</p>
+<p><code>Question</code>: Test if the mean high temperature in city1 is higher than the mean high temperature in city2.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>temp_city1 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">83</span>,<span class="dv">91</span>,<span class="dv">89</span>,<span class="dv">89</span>,<span class="dv">94</span>,<span class="dv">96</span>,<span class="dv">91</span>,<span class="dv">92</span>,<span class="dv">90</span>)</span>
 <span id="cb47-2"><a href="#cb47-2"></a>temp_city2 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">78</span>,<span class="dv">82</span>,<span class="dv">81</span>,<span class="dv">77</span>,<span class="dv">79</span>,<span class="dv">81</span>,<span class="dv">80</span>,<span class="dv">81</span>)</span>
 <span id="cb47-3"><a href="#cb47-3"></a><span class="fu">wilcox.test</span>(temp_city1,temp_city2,<span class="at">alternative =</span> <span class="st">"g"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  temp_city1 and temp_city2
+W = 72, p-value = 0.0003033
+alternative hypothesis: true location shift is greater than 0</code></pre>
+</div>
+</div>
+</section>
+<section id="tests-based-on-the-ranks-1" class="slide level2">
+<h2>Tests Based on the Ranks</h2>
+<h3 id="wilcoxon-signed-ranks-test-paired-data">Wilcoxon Signed Ranks Test (paired data)</h3>
+<p>Comparing two dependent samples. This test can be used as an alternative to the paired t-test when the assumptions are not met.</p>
+<p><code>Data</code></p>
+<ul>
+<li>The data consists of observations on a bivariate random sample <span class="math inline">\((X_i, Y_i)\)</span>, where <span class="math inline">\(n'\)</span> is the number of the pairs observed. Find the differences <span class="math inline">\(D_i=Y_i - X_i\)</span>. The absolute differences are:</li>
+</ul>
+<p><span class="math display">\[
+\mid D_i\mid = \mid Y_i - X_i \mid, \qquad i=1,2\ldots,n'
+\]</span></p>
+<ul>
+<li><p>Omit the pairs where the difference is zero. Let <span class="math inline">\(n\)</span> be the remaining pairs. Ranks from 1 to <span class="math inline">\(n\)</span> are assigned to the <span class="math inline">\(n\)</span> pairs according to <span class="math inline">\(\mid D_i\mid\)</span>.</p></li>
+<li><p>If several samples values are exactly equal to each other (tied), assign to each their average of the ranks that would have been used to them if there had been no ties.</p></li>
+</ul>
+</section>
+<section id="wilcoxon-signed-ranks-test-paired-data-1" class="slide level2">
+<h2>Wilcoxon Signed Ranks Test (paired data)</h2>
+<p><code>Test Statistic</code></p>
+<p>Let <span class="math inline">\(R_i\)</span> called the signed rank be defined for each pair <span class="math inline">\((X_i, Y_i)\)</span> as follows: the rank is positive if the D is positive, and negative if the difference D is negative.</p>
+<ul>
+<li><p>If no ties: $ T^+ = (R_i D_i ) $. Tables for exact lower quantiles, under <span class="math inline">\(H_0\)</span>, exist. The upper quantile is given: <span class="math inline">\(w_p = n(n+1)/2 - w_{1-p}\)</span>. We will use R.</p></li>
+<li><p>If there are ties or <span class="math inline">\(n&gt;50\)</span>: $ T = $ Standard normal distribution, under <span class="math inline">\(H_0\)</span>.</p></li>
+</ul>
+</section>
+<section id="wilcoxon-signed-ranks-test-paired-data-2" class="slide level2">
+<h2>Wilcoxon Signed Ranks Test (paired data)</h2>
+<p><code>Hypotheses</code></p>
+<ul>
+<li><code>Two-tailed test</code></li>
+</ul>
+<p><span class="math display">\[ H_0: E(D) = 0 \]</span></p>
+<p><span class="math display">\[H_1: E(D) \neq 0 \]</span></p>
+<p>The rejection region is defined by the quantiles <span class="math inline">\(T^+_{\alpha/2} (or T)\)</span> and <span class="math inline">\(T^+_{1-\alpha/2} (or T)\)</span>. <span class="math inline">\(\alpha\)</span> is the significance level.</p>
+</section>
+<section id="wilcoxon-signed-ranks-test-paired-data-3" class="slide level2">
+<h2>Wilcoxon Signed Ranks Test (paired data)</h2>
+<ul>
+<li><code>Upper-tailed test</code></li>
+</ul>
+<p><span class="math display">\[ H_0: E(D) \leq 0\]</span></p>
+<p><span class="math display">\[H_1: E(D) &gt; 0 \]</span></p>
+<p>The rejection region is defined by the quantiles <span class="math inline">\(T^+_{1-\alpha} ( or T)\)</span>. <span class="math inline">\(\alpha\)</span> is the significance level.</p>
+<ul>
+<li><code>Lower-tailed test</code></li>
+</ul>
+<p><span class="math display">\[ H_0:  E(D) \geq 0 \]</span></p>
+<p><span class="math display">\[H_1: E(D) &lt;0  \]</span></p>
+<p>The rejection region is defined by the quantiles <span class="math inline">\(T^+_{\alpha} (or T)\)</span>. <span class="math inline">\(\alpha\)</span> is the significance level.</p>
+</section>
+<section id="wilcoxon-signed-ranks-test---example-r" class="slide level2">
+<h2>Wilcoxon Signed Ranks Test - Example R</h2>
+<p>High temperatures are randomly selected from days in a summer in 2 cities.</p>
+<p><code>Question</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>temp_city1 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">83</span>,<span class="dv">91</span>,<span class="dv">89</span>,<span class="dv">89</span>,<span class="dv">94</span>,<span class="dv">96</span>,<span class="dv">91</span>,<span class="dv">92</span>,<span class="dv">90</span>)</span>
+<span id="cb49-2"><a href="#cb49-2"></a>temp_city2 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">78</span>,<span class="dv">82</span>,<span class="dv">81</span>,<span class="dv">77</span>,<span class="dv">79</span>,<span class="dv">81</span>,<span class="dv">80</span>,<span class="dv">81</span>)</span>
+<span id="cb49-3"><a href="#cb49-3"></a><span class="fu">wilcox.test</span>(temp_city1,temp_city2,<span class="at">alternative =</span> <span class="st">"g"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Wilcoxon rank sum test with continuity correction
