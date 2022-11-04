@@ -1678,22 +1678,25 @@ alternative hypothesis: true location shift is greater than 0</code></pre>
 </section>
 <section id="wilcoxon-signed-ranks-test---example-r" class="slide level2">
 <h2>Wilcoxon Signed Ranks Test - Example R</h2>
-<p>High temperatures are randomly selected from days in a summer in 2 cities.</p>
-<p><code>Question</code>:</p>
+<ul>
+<li>12 sets of twins</li>
+<li>Measures of the amount of aggressiveness (higher scores mean more aggressive)</li>
+</ul>
+<p><code>Question</code>: Test if first born twin is more aggressive than the other.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>temp_city1 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">83</span>,<span class="dv">91</span>,<span class="dv">89</span>,<span class="dv">89</span>,<span class="dv">94</span>,<span class="dv">96</span>,<span class="dv">91</span>,<span class="dv">92</span>,<span class="dv">90</span>)</span>
-<span id="cb49-2"><a href="#cb49-2"></a>temp_city2 <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">78</span>,<span class="dv">82</span>,<span class="dv">81</span>,<span class="dv">77</span>,<span class="dv">79</span>,<span class="dv">81</span>,<span class="dv">80</span>,<span class="dv">81</span>)</span>
-<span id="cb49-3"><a href="#cb49-3"></a><span class="fu">wilcox.test</span>(temp_city1,temp_city2,<span class="at">alternative =</span> <span class="st">"g"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>first_born<span class="ot">=</span> <span class="fu">c</span>(<span class="dv">86</span>,<span class="dv">71</span>,<span class="dv">77</span>,<span class="dv">68</span>,<span class="dv">91</span>,<span class="dv">72</span>,<span class="dv">77</span>,<span class="dv">91</span>,<span class="dv">70</span>,<span class="dv">71</span>,<span class="dv">88</span>,<span class="dv">87</span>)</span>
+<span id="cb49-2"><a href="#cb49-2"></a>second_born <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">88</span>,<span class="dv">77</span>,<span class="dv">76</span>,<span class="dv">64</span>,<span class="dv">96</span>,<span class="dv">72</span>,<span class="dv">65</span>,<span class="dv">90</span>,<span class="dv">65</span>,<span class="dv">80</span>,<span class="dv">81</span>,<span class="dv">72</span>)</span>
+<span id="cb49-3"><a href="#cb49-3"></a><span class="fu">wilcox.test</span>(first_born,second_born,<span class="at">paired=</span>T,<span class="at">alternative =</span> <span class="st">"g"</span>,<span class="at">correct =</span> T,<span class="at">exact =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    Wilcoxon rank sum test with continuity correction
+    Wilcoxon signed rank test with continuity correction
 
-data:  temp_city1 and temp_city2
-W = 72, p-value = 0.0003033
+data:  first_born and second_born
+V = 41.5, p-value = 0.2382
 alternative hypothesis: true location shift is greater than 0</code></pre>
 </div>
 </div>
-<p>From the test above W=72. The relationship between W and T is given by <span class="math display">\[W= T-n(n+1)/2\]</span> For this example: <span class="math inline">\(W=117-9\times10/2=117-45=72\)</span>.</p>
+<p>P-value &gt; 0.05. Fail to reject H0. There is evidence to suggest that the first born is not more aggressive than the second born.</p>
 <div class="footer footer-default">
 <p>STA4051 - Nonparametric Statistics</p>
 </div>
