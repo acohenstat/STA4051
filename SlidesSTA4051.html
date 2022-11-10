@@ -485,9 +485,11 @@
 </section>
 <section id="quantiles" class="slide level2">
 <h2>Quantiles</h2>
-<blockquote>
-<p>The number <span class="math inline">\(x_p\)</span> (<span class="math inline">\(0 \leq p \leq 1\)</span>) is called the <span class="math inline">\(p^{th}\)</span> quantile of a random variable <span class="math inline">\(X\)</span> if: - Continuous: <span class="math inline">\(P(X\leq x_p) = p\)</span> - Discrete: <span class="math inline">\(P(X &lt; x_p) \leq p\)</span> AND <span class="math inline">\(P(X\leq x_p) \geq p\)</span></p>
-</blockquote>
+<p><code>Definition</code>: The number <span class="math inline">\(x_p\)</span> (<span class="math inline">\(0 \leq p \leq 1\)</span>) is called the <span class="math inline">\(p^{th}\)</span> quantile of a random variable <span class="math inline">\(X\)</span> if:</p>
+<ul>
+<li><p>Continuous: <span class="math inline">\(P(X\leq x_p) = p\)</span></p></li>
+<li><p>Discrete: <span class="math inline">\(P(X &lt; x_p) \leq p\)</span> AND <span class="math inline">\(P(X\leq x_p) \geq p\)</span></p></li>
+</ul>
 <p>We can think of quantiles as points that split the distribution (values of <span class="math inline">\(X\)</span>) into equal intervals.</p>
 <p><strong>Examples</strong>:</p>
 <ul>
@@ -497,8 +499,8 @@
 <li>10-quantiles <span class="math inline">\(\equiv\)</span> decile (<span class="math inline">\(x_{0.1},x_{0.2},\ldots,x_{0.9}\)</span>)</li>
 </ul>
 </section>
-<section id="quantiles-1" class="slide level2">
-<h2>Quantiles</h2>
+<section id="quantiles---example" class="slide level2">
+<h2>Quantiles - Example</h2>
 <p>Let’s <span class="math inline">\(X\)</span> be a r.v. with PMF:</p>
 <table>
 <thead>
@@ -520,17 +522,17 @@
 </tr>
 </tbody>
 </table>
-<p>What is <span class="math inline">\(x_{0.75}\)</span> the upper-quartile?</p>
-<blockquote>
-<p>Solution: Find <span class="math inline">\(x_{0.75}\)</span> that satisfies <span class="math inline">\(P(X &lt; x_{0.75}) \leq 0.75\)</span> AND <span class="math inline">\(P(X\leq x_{0.75}) \geq 0.75\)</span>; if more than one value satisfy this then the average of all values is the answer. (<span class="math inline">\(x_{0.75}\)</span>=2)</p>
-</blockquote>
-<p>What is <span class="math inline">\(x_{0.5}\)</span> the median?</p>
-<blockquote>
-<p>Solution: Find <span class="math inline">\(x_{0.5}\)</span> that satisfies <span class="math inline">\(P(X &lt; x_{0.5}) \leq 0.5\)</span> AND <span class="math inline">\(P(X\leq x_{0.5}) \geq 0.5\)</span>; if more than one value satisfy this then the average of all values is the answer.(<span class="math inline">\(x_{0.5}\)</span>=1.5)</p>
-</blockquote>
+<ol type="1">
+<li>What is <span class="math inline">\(x_{0.75}\)</span> the upper-quartile?</li>
+</ol>
+<p><code>Solution</code>: Find <span class="math inline">\(x_{0.75}\)</span> that satisfies <span class="math inline">\(P(X &lt; x_{0.75}) \leq 0.75\)</span> AND <span class="math inline">\(P(X\leq x_{0.75}) \geq 0.75\)</span>; if more than one value satisfy this then the average of all values is the answer. (<span class="math inline">\(x_{0.75}\)</span>=2)</p>
+<ol start="2" type="1">
+<li>What is <span class="math inline">\(x_{0.5}\)</span> the median?</li>
+</ol>
+<p><code>Solution</code>: Find <span class="math inline">\(x_{0.5}\)</span> that satisfies <span class="math inline">\(P(X &lt; x_{0.5}) \leq 0.5\)</span> AND <span class="math inline">\(P(X\leq x_{0.5}) \geq 0.5\)</span>; if more than one value satisfy this then the average of all values is the answer.(<span class="math inline">\(x_{0.5}\)</span>=1.5)</p>
 </section>
-<section id="quantiles-2" class="slide level2">
-<h2>Quantiles</h2>
+<section id="quantiles---r" class="slide level2">
+<h2>Quantiles - R</h2>
 <p>Example 1:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>x <span class="ot">=</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>) <span class="co">#a vector from 1 to 12</span></span>
@@ -1055,11 +1057,15 @@ P(X_{(r)} \leq \text{a fraction q of the population} \leq X_{(n+m-1)}) \geq 1-\a
 <h2>Chi-squared Test - Example 1</h2>
 <div class="r-fit-text">
 <ol type="1">
-<li>Define the null and alternative hypotheses <br> <code>Answer:</code> <span class="math display">\[ H_0: p_1 = p_2 \]</span> <span class="math display">\[H_1: p_1 \neq p_2 \]</span> This is an two-tailed test.</li>
-<li>Find the Test statistic observed and null distribution<br> <code>Answer:</code> <span class="math inline">\(T_{obs}=-1.2695\)</span> and <span class="math inline">\(T\sim N(0,1)\)</span></li>
-<li>Determine critical values (rejection region) <br> <code>Answer:</code> +/- -1.959964</li>
-<li>Find P-value<br> <code>Answer:</code> p-value=0.2042628</li>
-<li>Decision <br> <code>Answer:</code> Since P-value &gt; 0.05 then Fail to Reject <span class="math inline">\(H_0\)</span>.</li>
+<li>Define the null and alternative hypotheses <br></li>
+</ol>
+<p><span class="math display">\[ H_0: p_1 = p_2 \]</span> <span class="math display">\[H_1: p_1 \neq p_2 \]</span></p>
+<p>This is an two-tailed test.</p>
+<ol start="2" type="1">
+<li><p>Find the Test statistic observed and null distribution<br> <span class="math inline">\(T_{obs}=-1.2695\)</span> and <span class="math inline">\(T\sim N(0,1)\)</span></p></li>
+<li><p>Determine critical values (rejection region): +/- 1.96</p></li>
+<li><p>Find P-value: p-value = 0.204</p></li>
+<li><p>Decision: Since P-value &gt; 0.05 then Fail to Reject <span class="math inline">\(H_0\)</span>.</p></li>
 </ol>
 </div>
 </section>
@@ -1132,16 +1138,17 @@ X-squared = 1.1372, df = 1, p-value = 0.2863</code></pre>
 </section>
 <section id="chi-squared-test---example-2-1" class="slide level2">
 <h2>Chi-squared Test - Example 2</h2>
-<div class="r-fit-text">
 <ol type="1">
-<li>Define the null and alternative hypotheses <br> <code>Answer:</code> <span class="math display">\[ H_0: p_1 = p_2 \]</span> <span class="math display">\[H_1: p_1 \neq p_2 \]</span> This is an two-tailed test.</li>
-<li>Find the Test statistic observed and null distribution<br> <code>Answer:</code> <span class="math inline">\(T_{obs}=-1.53\)</span> and <span class="math inline">\(T\sim N(0,1)\)</span></li>
-<li>Determine critical values (rejection region) <br> <code>Answer:</code> +/- -1.959964</li>
-<li>Find P-value<br> <code>Answer:</code> p-value=0.1260167</li>
-<li>Decision and Interpretation <br> <code>Answer:</code> Since P-value &gt; 0.05 then Fail to Reject <span class="math inline">\(H_0\)</span>.</li>
+<li>Define the null and alternative hypotheses <br></li>
 </ol>
-<p>There is insufficient evidence to support that men and women differ in their preferences regarding the new toothpaste.</p>
-</div>
+<p><span class="math display">\[ H_0: p_1 = p_2 \]</span> <span class="math display">\[H_1: p_1 \neq p_2 \]</span></p>
+<p>This is an two-tailed test.</p>
+<ol start="2" type="1">
+<li><p>Find the Test statistic observed and null distribution<br> <span class="math inline">\(T_{obs}=-1.53\)</span> and <span class="math inline">\(T\sim N(0,1)\)</span></p></li>
+<li><p>Determine critical values (rejection region): +/- 1.96</p></li>
+<li><p>Find P-value: p-value=0.1260167</p></li>
+<li><p>Decision and Interpretation: Since P-value &gt; 0.05 then Fail to Reject <span class="math inline">\(H_0\)</span>. There is insufficient evidence to support that men and women differ in their preferences regarding the new toothpaste.</p></li>
+</ol>
 </section>
 <section id="contingency-tables-6" class="slide level2">
 <h2>Contingency Tables</h2>
@@ -1647,8 +1654,8 @@ alternative hypothesis: true location shift is greater than 0</code></pre>
 <p><code>Test Statistic</code></p>
 <p>Let <span class="math inline">\(R_i\)</span> called the signed rank be defined for each pair <span class="math inline">\((X_i, Y_i)\)</span> as follows: the rank is positive if the D is positive, and negative if the difference D is negative.</p>
 <ul>
-<li><p>If no ties: $ T^+ = (R_i D_i ) $. Tables for exact lower quantiles, under <span class="math inline">\(H_0\)</span>, exist. The upper quantile is given: <span class="math inline">\(w_p = n(n+1)/2 - w_{1-p}\)</span>. We will use R.</p></li>
-<li><p>If there are ties or <span class="math inline">\(n&gt;50\)</span>: $ T = $ Standard normal distribution, under <span class="math inline">\(H_0\)</span>.</p></li>
+<li><p>If no ties: <span class="math inline">\(T^+ = \sum (R_i \text{where} D_i \text{is positive})\)</span>. Tables for exact lower quantiles, under <span class="math inline">\(H_0\)</span>, exist. The upper quantile is given: <span class="math inline">\(w_p = n(n+1)/2 - w_{1-p}\)</span>. We will use R.</p></li>
+<li><p>If there are ties: <span class="math inline">\(T = \frac{\sum_{i=1}^n R_i}{\sqrt{\sum_{i=1}^n R_i^2}}\sim\)</span> Standard normal distribution, under <span class="math inline">\(H_0\)</span>.</p></li>
 </ul>
 </section>
 <section id="wilcoxon-signed-ranks-test-paired-data-2" class="slide level2">

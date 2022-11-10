@@ -107,8 +107,10 @@ $$E(X) = \int_{\forall x} x f(x) dx $$
 
 ## Quantiles
 
-> The number $x_p$ ($0 \leq p \leq 1$) is called the $p^{th}$ quantile of a random variable $X$ if:
+`Definition`: The number $x_p$ ($0 \leq p \leq 1$) is called the $p^{th}$ quantile of a random variable $X$ if:
+
 - Continuous: $P(X\leq x_p) = p$
+
 - Discrete: $P(X < x_p) \leq p$ AND $P(X\leq x_p) \geq p$
     
 We can think of quantiles as points that split the distribution (values of $X$) into equal intervals.
@@ -121,7 +123,7 @@ We can think of quantiles as points that split the distribution (values of $X$) 
  - 10-quantiles $\equiv$ decile ($x_{0.1},x_{0.2},\ldots,x_{0.9}$)
  
 
-## Quantiles 
+## Quantiles - Example
 
 Let's $X$ be a r.v. with PMF:
 
@@ -129,16 +131,16 @@ Let's $X$ be a r.v. with PMF:
 |---------|-----|------|------|------|
 | P(X=x)      | 1/4 | 1/4| 1/3 |1/6|
 
-What is $x_{0.75}$ the upper-quartile?
+1. What is $x_{0.75}$ the upper-quartile?
 
->Solution: Find $x_{0.75}$ that satisfies $P(X < x_{0.75}) \leq 0.75$ AND $P(X\leq x_{0.75}) \geq 0.75$; if more than one value satisfy this then the average of all values is the answer. ($x_{0.75}$=2)
+`Solution`: Find $x_{0.75}$ that satisfies $P(X < x_{0.75}) \leq 0.75$ AND $P(X\leq x_{0.75}) \geq 0.75$; if more than one value satisfy this then the average of all values is the answer. ($x_{0.75}$=2)
 
-What is $x_{0.5}$ the median?
+2. What is $x_{0.5}$ the median?
 
->Solution: Find $x_{0.5}$ that satisfies $P(X < x_{0.5}) \leq 0.5$ AND $P(X\leq x_{0.5}) \geq 0.5$; if more than one value satisfy this then the average of all values is the answer.($x_{0.5}$=1.5)
+`Solution`: Find $x_{0.5}$ that satisfies $P(X < x_{0.5}) \leq 0.5$ AND $P(X\leq x_{0.5}) \geq 0.5$; if more than one value satisfy this then the average of all values is the answer.($x_{0.5}$=1.5)
 
 
-## Quantiles 
+## Quantiles - R
 
 Example 1:
 
@@ -628,17 +630,17 @@ The number of items in two car loads.
  
 ::: {.r-fit-text}
 1. Define the null and alternative hypotheses <br>
-`Answer:` $$ H_0: p_1 = p_2 $$ $$H_1: p_1 \neq p_2 $$
+$$ H_0: p_1 = p_2 $$ $$H_1: p_1 \neq p_2 $$
 This is an two-tailed test.
+
 2. Find the Test statistic observed and null distribution<br>
-`Answer:` $T_{obs}=-1.2695$ and $T\sim N(0,1)$
-3. Determine critical values (rejection region) <br>
-`Answer:` +/- `r {qnorm(0.025)}`
-4. Find P-value<br>
-`Answer:` p-value=`r {2*pnorm(-1.2695)}`
-5. Decision
-<br>
-`Answer:` Since P-value > 0.05 then Fail to Reject $H_0$.
+ $T_{obs}=-1.2695$ and $T\sim N(0,1)$
+
+3. Determine critical values (rejection region):  +/- 1.96
+
+4. Find P-value: p-value = 0.204
+
+5. Decision: Since P-value > 0.05 then Fail to Reject $H_0$.
 :::
 
 
@@ -678,23 +680,18 @@ A new toothpaste is tested for men and women preferences.
  
 ## Chi-squared Test - Example 2
  
-::: {.r-fit-text}
+
 1. Define the null and alternative hypotheses <br>
-`Answer:` $$ H_0: p_1 = p_2 $$ $$H_1: p_1 \neq p_2 $$
+$$ H_0: p_1 = p_2 $$ $$H_1: p_1 \neq p_2 $$
 This is an two-tailed test.
+
 2. Find the Test statistic observed and null distribution<br>
-`Answer:` $T_{obs}=-1.53$ and $T\sim N(0,1)$
-3. Determine critical values (rejection region) <br>
-`Answer:` +/- `r {qnorm(0.025)}`
-4. Find P-value<br>
-`Answer:` p-value=`r {2*pnorm(-1.53)}`
-5. Decision and Interpretation
-<br>
-`Answer:` Since P-value > 0.05 then Fail to Reject $H_0$.
+$T_{obs}=-1.53$ and $T\sim N(0,1)$
 
+3. Determine critical values (rejection region):  +/- 1.96
+4. Find P-value: p-value=`r {2*pnorm(-1.53)}`
+5. Decision and Interpretation: Since P-value > 0.05 then Fail to Reject $H_0$.
 There is insufficient evidence to support that men and women differ in their preferences regarding the new toothpaste. 
-
-:::
 
 
 
@@ -1128,9 +1125,9 @@ Let $R_i$ called the signed rank be defined for each pair $(X_i, Y_i)$ as follow
 
 
 - If no ties: 
-$ T^+ = \sum (R_i \text{where} D_i \text{is positive}) \sim$. Tables for exact lower quantiles, under $H_0$, exist. The upper quantile is given: $w_p = n(n+1)/2 - w_{1-p}$. We will use R.
+$T^+ = \sum (R_i \text{where} D_i \text{is positive})$. Tables for exact lower quantiles, under $H_0$, exist. The upper quantile is given: $w_p = n(n+1)/2 - w_{1-p}$. We will use R.
 
-- If there are ties or $n>50$: $ T = \frac{\sum_{i=1}^n R_i}{\sqrt{\sum_{i=1}^n R_i^2}}\sim$ Standard normal distribution, under $H_0$.
+- If there are ties: $T = \frac{\sum_{i=1}^n R_i}{\sqrt{\sum_{i=1}^n R_i^2}}\sim$ Standard normal distribution, under $H_0$.
 
 ## Wilcoxon Signed Ranks Test (paired data)
 
